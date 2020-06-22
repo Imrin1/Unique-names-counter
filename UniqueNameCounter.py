@@ -1,4 +1,3 @@
 
 
-def int countUniqueNames(billFirstName, billLastName, shipFirstName, shipLastName, billNameOnCard):
-    
+def  countUniqueNames(billFirstName, billLastName, shipFirstName, shipLastName, billNameOnCard):
