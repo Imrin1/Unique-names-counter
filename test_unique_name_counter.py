@@ -1,6 +1,6 @@
 import unittest
 import Unique_name_counter
-
+from spellchecker import SpellChecker
 class TestUniqueNameCounter(unittest.TestCase):
 
     def test_AllEqual(self):
@@ -9,3 +9,4 @@ class TestUniqueNameCounter(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    

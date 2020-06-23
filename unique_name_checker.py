@@ -4,8 +4,10 @@ from spellchecker import SpellChecker
 def nameCompare(name1, name2):
     """the function checks by typo's and nicknames if two names are equals. returns false if differnent names and true if equals"""
     spell = SpellChecker(distance = 1)
-    nameSet1 = spell.candidates(name1)
-    nameSet2 = spell.candidates(name2)
+    nameSet1 = spell.edit_distance_1(name1)
+    nameSet2 = spell.edit_distance_1(name2)
+    print(nameSet1)
+    print(nameSet2)
     candidateSet1 = set()
     candidateSet2 = set()
     with open('nicknames.csv') as csv_file:
@@ -30,8 +32,8 @@ def nameCompare(name1, name2):
 def SurNameCompare(name1, name2):
     """checks if two surnames are equals by surnames database and typo's. returns false if differnent names and true if equals"""
     spell = SpellChecker(distance = 1)
-    nameSet1 = spell.candidates(name1)
-    nameSet2 = spell.candidates(name2)
+    nameSet1 = spell.edit_distance_1(name1)
+    nameSet2 = spell.edit_distance_1(name2)
     candidateSet1 = set()
     candidateSet2 = set()
     with open('surnames.csv') as csv_file:
