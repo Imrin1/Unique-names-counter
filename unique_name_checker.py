@@ -6,8 +6,7 @@ def nameCompare(name1, name2):
     spell = SpellChecker(distance = 1)
     nameSet1 = spell.edit_distance_1(name1)
     nameSet2 = spell.edit_distance_1(name2)
-    print(nameSet1)
-    print(nameSet2)
+   
     candidateSet1 = set()
     candidateSet2 = set()
     with open('nicknames.csv') as csv_file:
@@ -53,11 +52,22 @@ def SurNameCompare(name1, name2):
 
 def uniqueFirstMiddleNameChecker(name1, name2):
     """checks if both first and middle names are equal. returns True if they are and False otherwise"""
-    if len(name1.split(' '))==1 or len(name2.split(' '))==1:
+    Fname1 = '' 
+    Mname1 = ''
+    Fname2 = '' 
+    Mname2 = ''
+    if len(name1.split(' '))==1 and len(name2.split(' '))==1:
         return nameCompare(name1, name2)
-    [Fname1 ,Mname1] = name1.split(' ')
-    [Fname2 ,Mname2] = name2.split(' ') 
-    return nameCompare(Fname1, Fname2) and nameCompare(Mname1, Mname2)
+    else:
+        if len(name1.split(' '))!=1 and len(name2.split(' '))==1:    
+            [Fname1 ,Mname1] = name1.split(' ')
+            return nameCompare(Fname1, name2)
+        if len(name2.split(' '))!=1:
+            [Fname2 ,Mname2] = name2.split(' ')
+            return nameCompare(name1, Fname2)
+        [Fname1 ,Mname1] = name1.split(' ')
+        [Fname2 ,Mname2] = name2.split(' ')
+        return nameCompare(Fname1, Fname2) and nameCompare(Mname1, Mname2)
 
 def uniqueFullNameChecker(Fname1,Lname1, Fname2, Lname2):
     """checks if the full names are equal"""
