@@ -3,6 +3,8 @@ from spellchecker import SpellChecker
 
 def nameCompare(name1, name2):
     """the function checks by typo's and nicknames if two names are equals. returns false if differnent names and true if equals"""
+    if name1 == name2:
+        return True
     spell = SpellChecker(distance = 1)
     nameSet1 = spell.edit_distance_1(name1)
     nameSet2 = spell.edit_distance_1(name2)
@@ -24,12 +26,14 @@ def nameCompare(name1, name2):
                     candidateSet2.add(row1)
                     candidateSet2.add(row2)  
                     
-        if len(set.intersection(candidateSet1, candidateSet2))>0:
-            return True
-        else: return False
+            if len(set.intersection(candidateSet1, candidateSet2))>0:
+                return True
+        return False
 
 def SurNameCompare(name1, name2):
     """checks if two surnames are equals by surnames database and typo's. returns false if differnent names and true if equals"""
+    if name1 == name2:
+        return True
     spell = SpellChecker(distance = 1)
     nameSet1 = spell.edit_distance_1(name1)
     nameSet2 = spell.edit_distance_1(name2)
@@ -46,24 +50,20 @@ def SurNameCompare(name1, name2):
                if name.lower() == row[0].lower():
                     candidateSet2.add(row[0].lower())
                     
-        if len(set.intersection(candidateSet1, candidateSet2))>0:
-            return True
-        else: return False
+            if len(set.intersection(candidateSet1, candidateSet2))>0:
+                return True
+        return False
 
 def uniqueFirstMiddleNameChecker(name1, name2):
     """checks if both first and middle names are equal. returns True if they are and False otherwise"""
-    Fname1 = '' 
-    Mname1 = ''
-    Fname2 = '' 
-    Mname2 = ''
     if len(name1.split(' '))==1 and len(name2.split(' '))==1:
         return nameCompare(name1, name2)
     else:
         if len(name1.split(' '))!=1 and len(name2.split(' '))==1:    
-            [Fname1 ,Mname1] = name1.split(' ')
+            Fname1 = name1.split(' ')[0]
             return nameCompare(Fname1, name2)
-        if len(name2.split(' '))!=1:
-            [Fname2 ,Mname2] = name2.split(' ')
+        if len(name2.split(' '))!=1 and len(name1.split(' '))==1:
+            Fname2 = name2.split(' ')[0]
             return nameCompare(name1, Fname2)
         [Fname1 ,Mname1] = name1.split(' ')
         [Fname2 ,Mname2] = name2.split(' ')

@@ -12,6 +12,8 @@ def countUniqueNames(billFirstName, billLastName, shipFirstName, shipLastName, b
     MnameOnCard = '' 
     LnameOnCard = ''
 
+    
+    
     #checks for a full name inside the bill name on card
     if len(billNameOnCard.split(' ')) == 3:
         [FnameOnCard, MnameOnCard, LnameOnCard] = billNameOnCard.split(' ')
@@ -25,9 +27,7 @@ def countUniqueNames(billFirstName, billLastName, shipFirstName, shipLastName, b
         else:
             if uniqueFullNameChecker(MnameOnCard + " " + LnameOnCard, FnameOnCard, shipFirstName, shipLastName):
                 counter-=1
-    if counter == 1:
-        return counter
-    
+   
     #checks for name without middle name  inside the bill name on card
     if len(billNameOnCard.split(' ')) == 2:
         [FnameOnCard, LnameOnCard] = billNameOnCard.split(' ')
@@ -41,12 +41,18 @@ def countUniqueNames(billFirstName, billLastName, shipFirstName, shipLastName, b
         else:
             if uniqueFullNameChecker(LnameOnCard, FnameOnCard, shipFirstName, shipLastName):
                 counter -= 1
-    if counter == 1:
-        return counter
     
     if uniqueFullNameChecker(billFirstName, billLastName, shipFirstName, shipLastName):
         counter-=1
-    return counter
+    
+    if counter == 3:
+        return 3
+    if counter == 2:
+        return 2
+    if counter == 1:
+        return 2
+    if counter == 0:
+        return 1
     
 
         
