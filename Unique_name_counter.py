@@ -1,42 +1,50 @@
-import unique_name_checker
+from unique_name_checker import uniqueFullNameChecker
 
 def countUniqueNames(billFirstName, billLastName, shipFirstName, shipLastName, billNameOnCard):
+    """counts the number of unique names in a transaction"""
     counter = 3
-    str.lower(billFirstName)
-    str.lower(billLastName)
-    str.lower(shipFirstName)
-    str.lower(shipLastName)
-    str.lower(billNameOnCard)
+    billFirstName.lower()
+    billLastName.lower()
+    shipFirstName.lower()
+    shipLastName.lower()
+    billNameOnCard.lower()
     FnameOnCard= '' 
     MnameOnCard = '' 
     LnameOnCard = ''
+
+    #checks for a full name inside the bill name on card
     if len(billNameOnCard.split(' ')) == 3:
         [FnameOnCard, MnameOnCard, LnameOnCard] = billNameOnCard.split(' ')
-        if unique_name_checker.uniqueFullNameChecker(FnameOnCard + " " + MnameOnCard, billFirstName) and unique_name_checker.uniqueFullNameChecker(LnameOnCard, billLastName):
+        if uniqueFullNameChecker(FnameOnCard + " " + MnameOnCard, LnameOnCard, billFirstName, billLastName):
             counter-=1
         else:
-            if unique_name_checker.uniqueFullNameChecker(MnameOnCard + " " + LnameOnCard, billFirstName) and unique_name_checker.uniqueFullNameChecker(FnameOnCard, billLastName):
+            if uniqueFullNameChecker(MnameOnCard + " " + LnameOnCard, FnameOnCard, billFirstName, billLastName):
                 counter-=1
-        if unique_name_checker.uniqueFullNameChecker(FnameOnCard + " " + MnameOnCard, shipFirstName) and unique_name_checker.uniqueFullNameChecker(LnameOnCard, shipLastName):
+        if uniqueFullNameChecker(FnameOnCard + " " + MnameOnCard, LnameOnCard, shipFirstName, shipLastName):
             counter-=1
         else:
-            if unique_name_checker.uniqueFullNameChecker(MnameOnCard + " " + LnameOnCard, shipFirstName) and unique_name_checker.uniqueFullNameChecker(FnameOnCard, shipLastName):
+            if uniqueFullNameChecker(MnameOnCard + " " + LnameOnCard, FnameOnCard, shipFirstName, shipLastName):
                 counter-=1
     if counter == 1:
-        return 1
+        return counter
+    
+    #checks for name without middle name  inside the bill name on card
     if len(billNameOnCard.split(' ')) == 2:
         [FnameOnCard, LnameOnCard] = billNameOnCard.split(' ')
-        if unique_name_checker.uniqueFullNameChecker(FnameOnCard, billFirstName) and unique_name_checker.uniqueFullNameChecker(LnameOnCard, billLastName):
+        if uniqueFullNameChecker(FnameOnCard,LnameOnCard, billFirstName, billLastName):
             counter -= 1
         else:
-            if unique_name_checker.uniqueFullNameChecker(LnameOnCard, billFirstName) and unique_name_checker.uniqueFullNameChecker(FnameOnCard, billLastName):
+            if uniqueFullNameChecker(LnameOnCard,FnameOnCard, billFirstName, billLastName):
                 counter -= 1 
-        if unique_name_checker.uniqueFullNameChecker(FnameOnCard, shipFirstName) and unique_name_checker.uniqueFullNameChecker(LnameOnCard, shipLastName):
+        if uniqueFullNameChecker(FnameOnCard, LnameOnCard, shipFirstName, shipLastName):
             counter -= 1
         else:
-            if unique_name_checker.uniqueFullNameChecker(LnameOnCard, shipFirstName) and unique_name_checker.uniqueFullNameChecker(FnameOnCard, shipLastName):
+            if uniqueFullNameChecker(LnameOnCard, FnameOnCard, shipFirstName, shipLastName):
                 counter -= 1
-    if unique_name_checker.uniqueFullNameChecker(billFirstName, shipFirstName) and unique_name_checker.uniqueFullNameChecker(billLastName, shipLastName):
+    if counter == 1:
+        return counter
+    
+    if uniqueFullNameChecker(billFirstName, billLastName, shipFirstName, shipLastName):
         counter-=1
     return counter
     
